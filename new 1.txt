@@ -155,3 +155,15 @@ update postac set statek="Latajacy Holender" where nazwa="Loki";
 delete from izba where nazwa_izby="spizarnia";
 
 drop table izba;
+
+LAB4
+ZADANUIE4
+a)INSERT INTO
+B)SP1.
+create table marynarz like postac;
+alter postac add statek varchar(50) drfault null;
+select* nazwa from postac where statek is not null;
+select nazwa from postac where statek1=NULL;
+insert into marynarz select* nazwa from postac where statek is not null;
+sp2
+create table marynarz2 select*from postac where is not null;
