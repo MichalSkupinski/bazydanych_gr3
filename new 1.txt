@@ -39,276 +39,63 @@ Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
 owners.
+#zadanie 1
+insert into postac values (default, "Bjorn", "wiking", "1100-11-09", 58), (default, "Drozd", "ptak", "1120-05-02", 10), (default, "Tesciowa", "kobieta", "1000-10-10", 97);
 
+update postac set wiek=88 where nazwa= "Tesciowa";
+#zadanie 2 
+create table walizka (id_walizki int auto_increment primary key, pojemnosc int unsigned, kolor enum("rozowy","czerwony","teczowy","zolty"), id_wlasciciela int, foreign key (id_wlasciciela) references postac (id_postaci) on delete cascade);
+
+alter table walizka alter kolor set default "rozowy";
+
+insert into walizka values(default,  50, "zolty", 1), (default, 30, "czerwony", 3);
+
+#zadanie 3
+create table izba (adres_budynku varchar(40), nazwa_izby varchar(40),  metraz int unsigned, wlasciciel int, foreign key (wlasciciel) references postac (id_postaci) on delete set null, primary key(adres_budynku, nazwa_izby));
+
+alter table izba add column kolor_izby varchar(15) after metraz;
+
+alter table izba alter kolor_izby set default "czarny";
+
+insert into izba values ("olsztyn", "spizarnia", 100,"brazowy",1);
+
+#zadanie 4
+create table przetwory (id_przetworu int primary key,  rok_produkcji int(4)  default 1654, id_wykonawcy int, foreign key (id_wykonawcy) references postac (id_postaci), zawartosc varchar(20), dodatek varchar(20)  default "papryczka chilli", id_konsumenta int, foreign key(id_konsumenta) references postac (id_postaci));
+
+insert into przetwory values(1, 1200, 1, "bigos",default, 3);
+#zadanie 5
+
+insert into postac values (default, "Thor", "wiking", "1134-04-12", 43),(default, "Odyn", "wiking", "1154-04-12", 23), (default, "Loki"," wiking", "1130-01-12",13),(default, "Helga", " wiking", "1124-02-12",53) ,(default, "Thorfin", " wiking", "1114-03-12",63)
+
+create table statek (nazwa_statku varchar(30) primary key, rodzaj_statku enum("fajny","fajniejszy","najfajniejszy"), data_wodowania DATE, max_ladownosc int unsigned)
+
+insert into statek values ("Czarna Perla","fajniejszy", "1100-10-10",300),("Latajacy Holender","najfajniejszy","1111-11-11",311);
+
+alter table postac add column funkcja varchar(40);
+
+update postac set funkcja = "kapitan" where nazwa="Bjorn";
+
+alter table postac add column statek varchar(30); 
+
+alter table postac ADD foreign key (statek) references statek(nazwa_statku);
+
+insert into statek values 
+
+update postac set statek="Czarna Perla" where nazwa="Bjorn";
+
+update postac set statek="Czarna Perla" where nazwa="Drozd";
+
+update postac set statek="Czarna Perla" where nazwa="Thor";
+
+update postac set statek="Czarna Perla" where nazwa="Thorfin";
+
+update postac set statek="Latajacy Holender" where nazwa="Odyn";
+
+update postac set statek="Latajacy Holender" where nazwa="Loki";
+
+delete from izba where nazwa_izby="spizarnia";
+
+drop table izba;
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> create table
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near '' at                                                                                                                                                              line 1
-mysql> create Table tabela iysql> create Tabl  id_postaci Primary key
-[1]+  Stopped                 mysql -u skupinskim -p
-skupinskim@bad2:~$ create table Tabela (id_postaci Primary Key IDT,
--bash: syntax error near unexpected token `('
-skupinskim@bad2:~$ create table Tabela id_postaci Primary Key ID INT,
--bash: create: command not found
-skupinskim@bad2:~$ create table id_postaci Primary Key ID INT,
--bash: create: command not found
-skupinskim@bad2:~$ Create table
--bash: Create: command not found
-skupinskim@bad2:~$ Create table id_postaci Primary Key Id Int
--bash: Create: command not found
-skupinskim@bad2:~$ ^C
-skupinskim@bad2:~$ ^C
-skupinskim@bad2:~$ mysql -u  skupinskim -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 802
-Server version: 8.0.22 MySQL Community Server - GPL
-
-Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-mysql> Create Table Tabela (id_postaci Primary Key Id INT)
-    -> , nazwa varchar(40),
-    -> rodzaj id int(wiking,ptak,kobieta),
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near 'Prima                                                                                                                                                             ry Key Id INT)
-, nazwa varchar(40),
-rodzaj id int(wiking,ptak,kobieta),' at line 1
-mysql>
-mysql>
-mysql> Create Table postac (id_postaci Primary Key auto_increment,
-    -> nazwa varchar(40),
-    -> rodzaj enum('wiking','ptak','kubieta'),
-    -> data_ur date,
-    -> wiek int unsigned;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near 'Prima                                                                                                                                                             ry Key auto_increment,
-nazwa varchar(40),
-rodzaj enum('wiking','ptak','kubi' at line 1
-mysql> create table postac3(
-    -> id_postaci int auto_increment primary key,
-    -> nazwa varchar(40),
-    -> rodzaj enum('wiking','ptak','kobieta'),
-    -> date_ur date,
-    -> wiek int unsigned;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near '' at                                                                                                                                                              line 6
-mysql> create table postac3( id_postaci int auto_increment primary key, nazwa va                                                                                                                                                             rchar(40), rodzaj enum('wiking','ptak','kobieta'), date_ur date, wiek int unsign                                                                                                                                                             ed;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near '' at                                                                                                                                                              line 1
-mysql> create table postac2(
-    -> id_postaci int auto_increment primary key,
-    -> nazwa varchar(40),
-    -> rodzaj enum('wiking','ptak','kobieta'),
-    -> date_ur date,
-    -> wiek int unsigned);
-ERROR 1046 (3D000): No database selected
-mysql> use skupinskim;
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
-
-Database changed
-mysql> create table postac2( id_postaci int auto_increment primary key, nazwa va                                                                                                                                                             rchar(40), rodzaj enum('wiking','ptak','kobieta'), date_ur date, wiek int unsign                                                                                                                                                             ed);
-Query OK, 0 rows affected (0.02 sec)
-
-mysql> Insert Into postac2('Bjorn','Drozd','Tesciowa','27.17.2021','25')
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near ''Bjor                                                                                                                                                             n','Drozd','Tesciowa','27.17.2021','25')' at line 1
-mysql> Insert Into postac2 Values('Bjorn','Drozd','Tesciowa','27.17.2021','25');                                                                                                                                                             
-ERROR 1366 (HY000): Incorrect integer value: 'Bjorn' for column 'id_postaci' at                                                                                                                                                              row 1
-mysql> Insert Into postac2 Values('Bjorn','Drozd','Tesciowa','27.17.2021','25');                                                                                                                                                             mysql> Insert Into postac2('Default','Bjorn','1','27.17.2021','25');
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near ''Defa                                                                                                                                                             ult','Bjorn','1','27.17.2021','25')' at line 1
-mysql> Insert Into postac2 Values('Default','Bjorn','1','27.17.2021','25');
-ERROR 1366 (HY000): Incorrect integer value: 'Default' for column 'id_postaci' a                                                                                                                                                             t row 1
-mysql> Insert Into postac2 Values('1','Bjorn','1','27.17.2021','25');
-ERROR 1292 (22007): Incorrect date value: '27.17.2021' for column 'date_ur' at r                                                                                                                                                             ow 1
-mysql> Insert Into postac2 Values('1','Bjorn','1','27/10/2021','25');
-ERROR 1292 (22007): Incorrect date value: '27/10/2021' for column 'date_ur' at r                                                                                                                                                             ow 1
-mysql> clear
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql> Insert Into postac2 Values('1','Bjorn','1',10/27/2021,'25')
-    -> ;
-ERROR 1292 (22007): Incorrect date value: '0.000183260945076694' for column 'dat                                                                                                                                                             e_ur' at row 1
-mysql> Insert Into postac2 Values('1','Bjorn','1',10.27.2021,'25');
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near '.2021                                                                                                                                                             ,'25')' at line 1
-mysql> Insert Into postac2 Values('1','Bjorn','1',27.10.2021,'25');
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near '.2021                                                                                                                                                             ,'25')' at line 1
-mysql> Insert Into postac2 Values('1','Bjorn','2','2021-10-27','25');
-Query OK, 1 row affected (0.00 sec)
-
-mysql> Insert Into postac2 Values('3','Drozd','4','2021-10-26','4');
-ERROR 1265 (01000): Data truncated for column 'rodzaj' at row 1
-mysql> Insert Into postac2 Values('3','Drozd','4','2021-10-26',4);
-ERROR 1265 (01000): Data truncated for column 'rodzaj' at row 1
-mysql> Insert Into postac2 Values('3','Drozd','2','2021-10-26',4);
-Query OK, 1 row affected (0.00 sec)
-
-mysql> Insert Into postac2 Values('4','Drozd','3','2021-10-25',66);
-Query OK, 1 row affected (0.03 sec)
-
-mysql> show tables
-    -> ;
-+----------------------+
-| Tables_in_skupinskim |
-+----------------------+
-| osoba                |
-| postac2              |
-+----------------------+
-2 rows in set (0.00 sec)
-
-mysql> Update postac2 set wiek=88 where nazwa="tesciowa";
-Query OK, 0 rows affected (0.00 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
-
-mysql> Create table walizka(
-    -> id_walzki int not_null auto_increment,^C
-mysql> create table walizak(
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near '' at                                                                                                                                                              line 1
-mysql> Create table walizka(
-    -> id_walizki int not null auto_increment,
-    -> pojemnosc unsigned,
-    -> kolor enum('rozowy','czerwony','teczowy','zolty'),
-    -> id_wlasciciela Foreign key(postfff;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that                                                                                                                                                              corresponds to your MySQL server version for the right syntax to use near 'unsig                                                                                                                                                             ned,
-kolor enum('rozowy','czerwony','teczowy','zolty'),
-id_wlasciciela Fore' at line 3
-mysql>
-mysql> Create table walizka(
-    -> id_walizki int not nul auto_increment,
-    -> pojemnosc int unsigned DEFAULT NULL,
-    -> kolor enum('rozowy','czerwony','teczowy','zolty')Default null,
-    -> id_wlasciciela int Default NULL,
-    -> Primar key ('id_walizki'),
-    -> Constraint 'walizka_ibfk_1' Foreign key ('id_wlasciciela')References 'pos                                                                                                                                                             tac2'('id_postaci') On delete cascade-> id_walizki int not nul auto_increment,
-    ->     -> pojemnosc int unsigned DEFAULT NULL,
-    ->     -> kolor enum('rozowy','czerwony','teczowy','zolty')Default null,
-    ->     -> id_wlasciciela int Default NULL,
-    ->     -> Primar key ('id_walizki'),
-    ->     -> Constraint 'walizka_ibfk_1' Foreign key ('id_wlasciciela')Referenc                                                                                                                                                             es 'postac2'('id_postaci') On delete cascade
-    -> ^C
-mysql>     -> Constraint 'walizka_ibfk_1' Foreign key ('id_wlasciciela')Referenc                                                                                                                                                             es 'postac2'('id_postaci') On delete cascade
-    ->
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> Constraint 'walizka_ibfk_1' Foreign key ('id_wlasciciela')References 'postac2' at line 1
-mysql> select * from postac2
-    -> ;
-+------------+-------+---------+------------+------+
-| id_postaci | nazwa | rodzaj  | date_ur    | wiek |
-+------------+-------+---------+------------+------+
-|          1 | Bjorn | ptak    | 2021-10-27 |   25 |
-|          3 | Drozd | ptak    | 2021-10-26 |    4 |
-|          4 | Drozd | kobieta | 2021-10-25 |   66 |
-+------------+-------+---------+------------+------+
-3 rows in set (0.00 sec)
-
-mysql> Update postac2 set rodzaj="1" where nazwa="Bjorn";
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from postac2
-    -> ;
-+------------+-------+---------+------------+------+
-| id_postaci | nazwa | rodzaj  | date_ur    | wiek |
-+------------+-------+---------+------------+------+
-|          1 | Bjorn | wiking  | 2021-10-27 |   25 |
-|          3 | Drozd | ptak    | 2021-10-26 |    4 |
-|          4 | Drozd | kobieta | 2021-10-25 |   66 |
-+------------+-------+---------+------------+------+
-3 rows in set (0.01 sec)
-
-mysql> Update postac2 set wiek="88" where nazwa="Tesciowa";
-Query OK, 0 rows affected (0.01 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
-
-mysql> select * from postac2;
-+------------+-------+---------+------------+------+
-| id_postaci | nazwa | rodzaj  | date_ur    | wiek |
-+------------+-------+---------+------------+------+
-|          1 | Bjorn | wiking  | 2021-10-27 |   25 |
-|          3 | Drozd | ptak    | 2021-10-26 |    4 |
-|          4 | Drozd | kobieta | 2021-10-25 |   66 |
-+------------+-------+---------+------------+------+
-3 rows in set (0.00 sec)
-
-mysql> Update postac2 set nazwa="Tesciowa" where wiek="66";
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from postac2;
-+------------+----------+---------+------------+------+
-| id_postaci | nazwa    | rodzaj  | date_ur    | wiek |
-+------------+----------+---------+------------+------+
-|          1 | Bjorn    | wiking  | 2021-10-27 |   25 |
-|          3 | Drozd    | ptak    | 2021-10-26 |    4 |
-|          4 | Tesciowa | kobieta | 2021-10-25 |   66 |
-+------------+----------+---------+------------+------+
-3 rows in set (0.00 sec)
-
-mysql> Update postac2 set wiek=:"88" where nazwa="Tesciowa";
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':"88" where nazwa="Tesciowa"' at line 1
-mysql> Update postac2 set wiek=:"88" where rodzaj="kobieta";
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':"88" where rodzaj="kobieta"' at line 1
-mysql> Update postac2 set wiek="88" where rodzaj="kobieta";
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from postac2;
-+------------+----------+---------+------------+------+
-| id_postaci | nazwa    | rodzaj  | date_ur    | wiek |
-+------------+----------+---------+------------+------+
-|          1 | Bjorn    | wiking  | 2021-10-27 |   25 |
-|          3 | Drozd    | ptak    | 2021-10-26 |    4 |
-|          4 | Tesciowa | kobieta | 2021-10-25 |   88 |
-+------------+----------+---------+------------+------+
-3 rows in set (0.00 sec)
-
-mysql>
-zad.2
-mysql> Create table walizka2( id_walizki int not null auto_increment,pojemnosc int unsigned default null, kolor enum('rozowy','czerwony','teczowy','zolty'), id_wlasciciela int default null, primary key (id_walizki), constraint walizka_ibfk_1 Foreign key (id_wlasciciela) References postac2(id_postaci) on delete cascade);
-Query OK, 0 rows affected (0.32 sec)
-
-mysql> select * from walizka2
-    -> ;
-Empty set (0.01 sec)
-
-mysql> select * from walizka2
-    -> ;
-Empty set (0.00 sec)
-
-mysql> desc walizka2;
-+----------------+---------------------------------------------+------+-----+---------+----------------+
-| Field          | Type                                        | Null | Key | Default | Extra          |
-+----------------+---------------------------------------------+------+-----+---------+----------------+
-| id_walizki     | int                                         | NO   | PRI | NULL    | auto_increment |
-| pojemnosc      | int unsigned                                | YES  |     | NULL    |                |
-| kolor          | enum('rozowy','czerwony','teczowy','zolty') | YES  |     | NULL    |                |
-| id_wlasciciela | int                                         | YES  | MUL | NULL    |                |
-+----------------+---------------------------------------------+------+-----+---------+----------------+
-4 rows in set (0.00 sec)
+m
