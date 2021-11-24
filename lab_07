@@ -1,1 +1,36 @@
+select nazwa, idkreatury, nazwa, idkreatury from kreatura;
+select*from kreatura kreaturak
+inner join kreatura k2 on k.idkreatury k2.idkreatury;
+select * from kreatura k 
+inner join ekwipunek e on k.idkreatury=e.idkreatury
+select k.rodzaj avg(e,ilosc*z.waga)
+from kreatura k2
+inner join ekwipunek e on k.idkreatury=e.id kreatury
+inner join zasob z on e.idzasobu=z.idzasobu
+where k.rodzaj not in(MALPA,WAZ)--and e.ilosz< 30
+group by k.rodzaj having sum(e.ilosc)<30;
+zadanie 5.2
 
+5.2
+select k.nazwa from kreatura.k;
+select rodaj, min (dataUr) AS MIN, MAX(DATAUR) as max from kreatura.k group by rodzaj) as pod
+where k.dataUr=pod.min and k.rodzaj=pod.rodzaj;
+select nazwa , rodzaj , min(dataur) from kreatura group by rodzaj 
+
+
+Create table kreatura select * from wikingowie.kreatura;
+
+Create table zasob select * from wikingowie.zasob;
+
+Create table ekwipunek select * from wikingowie.ekwipunek;
+
+select * from zasob;
+
+select * from zasob where rodzaj = "jedzenie";
+
+select idZasobu, nazwa from zasob where idZasobu IN(3,5,7);
+
+
+
+select * from kreatura k2left join uczestnicy u on k.idkreatury=u.id_uczestnika
+where u.id_uczestnika is null;
