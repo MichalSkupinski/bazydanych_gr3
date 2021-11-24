@@ -1,0 +1,62 @@
+#zadanie 1
+select * from postac where rodzaj="wiking" order by wiek desc limit 2;
+
+delete from postac where wiek="63";
+
+delete from postac where wiek="53";
+
+alter table walizka drop foreign key walizka_ibfk_1;
+
+alter table przetwory drop foreign key przetwory_ibfk_1;
+
+alter table przetwory drop foreign key przetwory_ibfk_2;
+
+alter table postac modify id_postaci int;
+
+alter table postac drop primary key;
+
+#zadanie 2
+alter table postac add column pesel char(11);
+
+alter table postac add primary key(pesel);
+
+update postac set pesel=12345678901 + id_postaci;
+
+alter table postac modify rodzaj enum("wiking","ptak","kobieta","syrena");
+
+insert into postac values(20,"Gertruda Nieszczera", "syrena", 1132-09-08, 300,default,default,12345678123);
+
+#zadanie 3
+
+update postac set statek="Czarna Perla" where nazwa like "%a%";
+
+update statek set max_ladownosc = max_ladownosc * 0.7 where data_wodowania > "1000-01-01";
+
+#Zadanie 4
+insert into postac values(19,"Loko",default,1134-03-11, 12, default,default,12345678965)
+
+create table marynarz like postac;
+
+
+insert into marynarz select * from postac where statek is not null;
+
+alter table marynarz add foreign key (statek) references statek(nazwa_statku);
+
+# Zadanie 5
+
+update postac set statek = default where statek is not null;
+
+delete from postac where nazwa = "Thor";
+
+alter table postac drop foreign key postac_ibfk_1;
+
+alter table marynarz drop foreign key marynarz_ibfk_1;
+
+
+truncate table statek;
+
+drop table statek;
+
+create table zwierz (id int primary key auto_increment, nazwa varchar(30), wiek int);
+
+insert into  zwierz select id_postaci, nazwa, wiek  from postac where rodzaj = "syrena" or rodzaj = "ptak" or rodzaj is null;
