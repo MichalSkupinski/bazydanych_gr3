@@ -1,5 +1,7 @@
 select nazwa, idkreatury, nazwa, idkreatury from kreatura;
 select*from kreatura kreaturak
+select nazwa, idkreatury, nazwa, idkreatury from kreatura;
+select*from kreatura kreaturak
 inner join kreatura k2 on k.idkreatury k2.idkreatury;
 select * from kreatura k 
 inner join ekwipunek e on k.idkreatury=e.idkreatury
@@ -34,3 +36,12 @@ select idZasobu, nazwa from zasob where idZasobu IN(3,5,7);
 
 select * from kreatura k2left join uczestnicy u on k.idkreatury=u.id_uczestnika
 where u.id_uczestnika is null;
+select idkreatury from kreatura where idkreatury not int
+
+
+select nazwa from kreatura  where idkreaturynot in (select dinict id_uczestnika from uczestnicy)
+select u.id_uczestnika , k.idkreatury from uzestnicy u right join kreatura k on on u.id_uczestnika=k.ikkreatury
+from wyprawa w
+inner join uczestnicy u on w.id_wyprawy=u.id_wyprawyinner join ekwipunek e on u.id_uczestnika=e.idkreatury;
+inner join zasob z on.eidzasobu=z.idzasobu
+group by w id_kreatury;
