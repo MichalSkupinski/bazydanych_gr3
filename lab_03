@@ -1,0 +1,57 @@
+#zadanie 1
+insert into postac values (default, "Bjorn", "wiking", "1100-11-09", 58), (default, "Drozd", "ptak", "1120-05-02", 10), (default, "Tesciowa", "kobieta", "1000-10-10", 97);
+
+update postac set wiek=88 where nazwa= "Tesciowa";
+#zadanie 2 
+create table walizka (id_walizki int auto_increment primary key, pojemnosc int unsigned, kolor enum("rozowy","czerwony","teczowy","zolty"), id_wlasciciela int, foreign key (id_wlasciciela) references postac (id_postaci) on delete cascade);
+
+alter table walizka alter kolor set default "rozowy";
+
+insert into walizka values(default,  50, "zolty", 1), (default, 30, "czerwony", 3);
+
+#zadanie 3
+create table izba (adres_budynku varchar(40), nazwa_izby varchar(40),  metraz int unsigned, wlasciciel int, foreign key (wlasciciel) references postac (id_postaci) on delete set null, primary key(adres_budynku, nazwa_izby));
+
+alter table izba add column kolor_izby varchar(15) after metraz;
+
+alter table izba alter kolor_izby set default "czarny";
+
+insert into izba values ("olsztyn", "spizarnia", 100,"brazowy",1);
+
+#zadanie 4
+create table przetwory (id_przetworu int primary key,  rok_produkcji int(4)  default 1654, id_wykonawcy int, foreign key (id_wykonawcy) references postac (id_postaci), zawartosc varchar(20), dodatek varchar(20)  default "papryczka chilli", id_konsumenta int, foreign key(id_konsumenta) references postac (id_postaci));
+
+insert into przetwory values(1, 1200, 1, "bigos",default, 3);
+#zadanie 5
+
+insert into postac values (default, "Thor", "wiking", "1134-04-12", 43),(default, "Odyn", "wiking", "1154-04-12", 23), (default, "Loki"," wiking", "1130-01-12",13),(default, "Helga", " wiking", "1124-02-12",53) ,(default, "Thorfin", " wiking", "1114-03-12",63)
+
+create table statek (nazwa_statku varchar(30) primary key, rodzaj_statku enum("fajny","fajniejszy","najfajniejszy"), data_wodowania DATE, max_ladownosc int unsigned)
+
+insert into statek values ("Czarna Perla","fajniejszy", "1100-10-10",300),("Latajacy Holender","najfajniejszy","1111-11-11",311);
+
+alter table postac add column funkcja varchar(40);
+
+update postac set funkcja = "kapitan" where nazwa="Bjorn";
+
+alter table postac add column statek varchar(30); 
+
+alter table postac ADD foreign key (statek) references statek(nazwa_statku);
+
+insert into statek values 
+
+update postac set statek="Czarna Perla" where nazwa="Bjorn";
+
+update postac set statek="Czarna Perla" where nazwa="Drozd";
+
+update postac set statek="Czarna Perla" where nazwa="Thor";
+
+update postac set statek="Czarna Perla" where nazwa="Thorfin";
+
+update postac set statek="Latajacy Holender" where nazwa="Odyn";
+
+update postac set statek="Latajacy Holender" where nazwa="Loki";
+
+delete from izba where nazwa_izby="spizarnia";
+
+drop table izba;
