@@ -57,3 +57,44 @@ select w.nazwa, sum(e.ilosc) from wyprawa
 inner join uczestnicy u on w.id_wyprawy=u.id_wyprawy 
 inner join ekwipunek e on u.id_uczestnika=e.idKreatury
 group by w.id_wyprawy;
+-----------------------------------------------------------------------------------------------------------
+lab 07
+
+
+zad2
+select concat(nazwa,'->', rodzaj) from kreatura;
+select rodzaj, cout(*) from kretura group by rodzaj;
+   ^
+   |
+zad2a
++ select rodzaj, cout(*), froup_concat(nazwa separator '|')from kreatura group by rodzaj;
+select* from wyprawa inner join uczestnicy u on w.id_wyprawy-u.id_wyprawy inner join kreatura k on k.id kreatury=u.id_uczestnika;
+select w.nazwa, count (u.id_uczestnika), group_concat(k.nazwa) from we.id_wyprawy;
+-------------------------------------------------------------------------------------------------------------------------------------------
+zad2b
+co potrzeba
+wyprawy, nazwy
+sortowanie
+1.data
+2.etapy+kierownik danego
+select w.data_rozpoczecia, k.nazwa from kreatura k, w.nazwa
+order by w.data_rozpoczeciaew.kolejnosc;
+--------------------------------------------------------------------------------------------------------------------------
+zad3a
+select* from etapy_wyprawy ew
+inner join sektors s on s.id_sektora=ew.sektor;
+select cout (distinct sektor)from etapy_wyprawy;
+left join sektor sew  on s.id_sektora=ew.sektor;
+left join etapy_wyprawy ew on s,id_sektora=ew.sektor;
+select s.nazwa,
+if(count(ew.sektor)) is null,0, cout(ew.sektor))
+from sektor sektorleft join etapy_wyprawy ew on s.id_sektora=ew.sektor group by s.id_sektora
+
+4.1
+select lenght(dziennik) from etapy_wyprawy;
+select id_etapu, idwyprawy, lenght(dziennik)from etapy_wyprawy group by idwyprawy;;
+\*select idWyprawy, sum(lenght(dziennik)) suma_dlugosc from etapy_wyprawy group by idwyprawy having sum_dlugosci< 400 \\
+4.2
+podpowiedź zad 2a
+wynik 2,2 14,8 +-
+5 tabeli
