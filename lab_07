@@ -1,53 +1,3 @@
-select nazwa, idkreatury, nazwa, idkreatury from kreatura;
-select*from kreatura kreaturak
-select nazwa, idkreatury, nazwa, idkreatury from kreatura;
-select*from kreatura kreaturak
-inner join kreatura k2 on k.idkreatury k2.idkreatury;
-select * from kreatura k 
-inner join ekwipunek e on k.idkreatury=e.idkreatury
-select k.rodzaj avg(e,ilosc*z.waga)
-from kreatura k2
-inner join ekwipunek e on k.idkreatury=e.id kreatury
-inner join zasob z on e.idzasobu=z.idzasobu
-where k.rodzaj not in(MALPA,WAZ)--and e.ilosz< 30
-group by k.rodzaj having sum(e.ilosc)<30;
-zadanie 5.2
-
-5.2
-select k.nazwa from kreatura.k;
-select rodaj, min (dataUr) AS MIN, MAX(DATAUR) as max from kreatura.k group by rodzaj) as pod
-where k.dataUr=pod.min and k.rodzaj=pod.rodzaj;
-select nazwa , rodzaj , min(dataur) from kreatura group by rodzaj 
-
-
-Create table kreatura select * from wikingowie.kreatura;
-
-Create table zasob select * from wikingowie.zasob;
-
-Create table ekwipunek select * from wikingowie.ekwipunek;
-
-select * from zasob;
-
-select * from zasob where rodzaj = "jedzenie";
-
-select idZasobu, nazwa from zasob where idZasobu IN(3,5,7);
-
-
-
-select * from kreatura k2left join uczestnicy u on k.idkreatury=u.id_uczestnika
-where u.id_uczestnika is null;
-select idkreatury from kreatura where idkreatury not int
-
-
-select nazwa from kreatura  where idkreaturynot in (select dinict id_uczestnika from uczestnicy)
-select u.id_uczestnika , k.idkreatury from uzestnicy u right join kreatura k on on u.id_uczestnika=k.ikkreatury
-from wyprawa w
-inner join uczestnicy u on w.id_wyprawy=u.id_wyprawyinner join ekwipunek e on u.id_uczestnika=e.idkreatury;
-inner join zasob z on.eidzasobu=z.idzasobu
-group by w id_kreatury;
-
-
-
 
 #Zadanie 1
 
@@ -57,44 +7,24 @@ select w.nazwa, sum(e.ilosc) from wyprawa
 inner join uczestnicy u on w.id_wyprawy=u.id_wyprawy 
 inner join ekwipunek e on u.id_uczestnika=e.idKreatury
 group by w.id_wyprawy;
------------------------------------------------------------------------------------------------------------
-lab 07
+#Zadanie 2
+ select w.nazwa, count(id_uczestnika), group_concat(k.nazwa) from wyprawa w inner join uczestnicy  u on w.id_wyprawy=u.id_wyprawy inner join kreatura k on k.idKreatury=u.id_uczestnika group by w.id_wyprawy;
+
+select ew.idEtapu, w.nazwa, w.data_rozpoczecia, k.nazwa, ew.kolejnosc  from kreatura k
+inner join wyprawa w on w.kierownik=k.idKreatury
+inner join etapy_wyprawy ew on  ew.idWyprawy=w.id_wyprawy
+inner join sektor s on ew.sektor=s.id_sektora 
+order  by w.data_rozpoczecia, ew.kolejnosc;
+
+#Zadanie 3
+select s.nazwa, ifnull(count(ew.sektor),0) from sektor s
+left join etapy_wyprawy ew on s.id_sektora = ew.sektor group by s.id_sektora;
+
+select k.idKreatury, if(count(u.id_wyprawy)>0 ,"bral udzial","nie bral") from   uczestnicy u
+left join kreatura k on k.idKreatury=u.id_uczestnika group by id_uczestnika;
 
 
-zad2
-select concat(nazwa,'->', rodzaj) from kreatura;
-select rodzaj, cout(*) from kretura group by rodzaj;
-   ^
-   |
-zad2a
-+ select rodzaj, cout(*), froup_concat(nazwa separator '|')from kreatura group by rodzaj;
-select* from wyprawa inner join uczestnicy u on w.id_wyprawy-u.id_wyprawy inner join kreatura k on k.id kreatury=u.id_uczestnika;
-select w.nazwa, count (u.id_uczestnika), group_concat(k.nazwa) from we.id_wyprawy;
--------------------------------------------------------------------------------------------------------------------------------------------
-zad2b
-co potrzeba
-wyprawy, nazwy
-sortowanie
-1.data
-2.etapy+kierownik danego
-select w.data_rozpoczecia, k.nazwa from kreatura k, w.nazwa
-order by w.data_rozpoczeciaew.kolejnosc;
---------------------------------------------------------------------------------------------------------------------------
-zad3a
-select* from etapy_wyprawy ew
-inner join sektors s on s.id_sektora=ew.sektor;
-select cout (distinct sektor)from etapy_wyprawy;
-left join sektor sew  on s.id_sektora=ew.sektor;
-left join etapy_wyprawy ew on s,id_sektora=ew.sektor;
-select s.nazwa,
-if(count(ew.sektor)) is null,0, cout(ew.sektor))
-from sektor sektorleft join etapy_wyprawy ew on s.id_sektora=ew.sektor group by s.id_sektora
+#Zadanie 4
 
-4.1
-select lenght(dziennik) from etapy_wyprawy;
-select id_etapu, idwyprawy, lenght(dziennik)from etapy_wyprawy group by idwyprawy;;
-\*select idWyprawy, sum(lenght(dziennik)) suma_dlugosc from etapy_wyprawy group by idwyprawy having sum_dlugosci< 400 \\
-4.2
-podpowiedź zad 2a
-wynik 2,2 14,8 +-
-5 tabeli
+
+select idWyprawy, sum(length(dziennik) form etapy_wyprawy group by idWyprawy having suma_dlugosci < 400;
